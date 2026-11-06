@@ -27,7 +27,7 @@ namespace Wordle
 
             Random r = new Random();
             string word = words[r.Next(words.Length)];
-            foreach (char c in word) cards.Children.Add(new Betu(c.ToString()));
+            foreach (char c in word) cards.Children.Add(new Betu(c.ToString(), word));
         }
     }
 }

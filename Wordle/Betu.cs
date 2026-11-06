@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Wordle
 {
@@ -21,7 +22,9 @@ namespace Wordle
         private String word_invis { get; set; }
         private int index { get; set; }
 
-        public Betu(String betu)
+        private String feladvany { get; set; }
+
+        public Betu(String betu, string feladvany)
         {
             word_invis = betu;
             this.Width = 100;
@@ -37,6 +40,7 @@ namespace Wordle
             index++;
             if (index >= magyarAbece.Length) index = 1;
             Content = magyarAbece[index];
+            Color();
             base.OnClick();
         }
 
@@ -45,7 +49,27 @@ namespace Wordle
             index--;
             if (index < 1) index = magyarAbece.Length - 1;
             Content = magyarAbece[index];
+            Color();
             base.OnMouseRightButtonDown(e);
+        }
+
+        private void Color()
+        {
+            if (magyarAbece[index] == word_invis)
+            {
+                this.Background = Brushes.ForestGreen;
+                this.Foreground = Brushes.White;
+            }
+            else if (feladvany.Contains(magyarAbece[index]))
+            {
+                this.Background = Brushes.Yellow;
+                this.Foreground = Brushes.Black;
+            }
+            else
+            {
+                this.Background = Brushes.LightGray;
+                this.Foreground = Brushes.Black;
+            }
         }
     }
 }
